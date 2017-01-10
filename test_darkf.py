@@ -99,6 +99,13 @@ def test_transpose():
 def test_cons():
     assert cons(1, [2, 3]) == [1, 2, 3]
 
+def test_mapfst_mapsnd():
+    assert mapfst(lambda x: x*2, (5, 10)) == (10, 10)
+    assert mapsnd(lambda x: x*2, (5, 10)) == (5, 20)
+
+def test_uncons():
+    assert mapsnd(list, uncons([1, 2, 3])) == (1, [2, 3])
+
 def test_head_tail():
     assert head([1, 2, 3]) == 1
     assert list(tail([1, 2, 3])) == [2, 3]

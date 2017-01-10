@@ -157,6 +157,9 @@ def cons(x, xs):
     ys.extend(xs)
     return ys
 
+def uncons(xs):
+    return (head(xs), tail(xs))
+
 def head(xs): return next(iter(xs))
 def tail(xs): return drop(1, xs)
 def empty(xs): return length(xs) == 0
@@ -166,3 +169,12 @@ def unlines(xs): return "\n".join(xs)
 
 def words(s): return s.split()
 def unwords(xs): return " ".join(xs)
+
+def fst(pair): return pair[0]
+def snd(pair): return pair[1]
+
+def mapfst(f, pair):
+    return (f(pair[0]), pair[1])
+
+def mapsnd(f, pair):
+    return (pair[0], f(pair[1]))

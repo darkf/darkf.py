@@ -16,6 +16,9 @@ class UnderscoreProxy:
        syntax than operator.itemgetter.
     """
 
+    # TODO: Add operator syntax for lambdas, e.g. _ == 3 meaning `lambda x: x == 3`
+    # as well as for item accessors, e.g. `_.foo == 3`.
+
     def __getattr__(self, attr):
         return lambda x: getattr(x, attr)
     
@@ -68,6 +71,9 @@ def foldl1(f, xs):
 def foldr1(f, xs):
     # foldr1 f xs ~ foldl (flip f) (reverse xs)
     return functools.reduce(flip(f), reversed(xs))
+
+def scanl1(f, xs):
+    return itertools.accumulate(xs, f)
 
 def nub(xs):
     return list(set(xs))

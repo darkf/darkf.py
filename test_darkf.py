@@ -44,8 +44,13 @@ def test_foldl():
     assert foldl1(operator.truediv, [1, 2, 3, 4, 5]) == (((1/2)/3)/4)/5
     assert foldl(operator.truediv, [2, 3, 4, 5], 1) == (((1/2)/3)/4)/5
 
+def test_foldr():
     assert foldr1(operator.truediv, [1, 2, 3, 4, 5]) == 1/(2/(3/(4/5)))
     # assert foldr(operator.truediv, [2, 3, 4, 5], 1) == 1/(2/(3/(4/5)))
+
+def test_scanl():
+    assert list(scanl1(operator.add, [1, 2, 3])) == [1, 3, 6]
+    assert list(scanl1(operator.mul, [1, 2, 3])) == [1, 2, 6]
 
 def test_nub():
     assert nub([1, 2, 3, 1, 2, 3, 1, 1]) == [1, 2, 3]

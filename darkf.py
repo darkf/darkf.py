@@ -119,3 +119,19 @@ def find_index(f, xs):
         if f(x):
             return i
     return None # TODO: except?
+
+def partition(f, xs):
+    it = iter(xs)
+
+    first = []
+    second = []
+
+    for x in it:
+        if f(x):
+            first.append(x)
+        else:
+            second.append(x)
+            break
+
+    second.extend(list(it))
+    return (first, second)

@@ -75,3 +75,8 @@ def test_find():
 
 def test_find_index():
     assert find_index(lambda x: x > 2, [1, 2, 3, 4, 5]) == 2
+
+def test_partition():
+    assert partition(lambda x: x <= 3, [1, 2, 3, 4, 5, 6]) == ([1, 2, 3], [4, 5, 6])
+    assert partition(lambda x: x <= 3, []) == ([], [])
+    assert partition(lambda x: x <= 3, [1]) == ([1], [])

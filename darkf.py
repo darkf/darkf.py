@@ -68,3 +68,42 @@ def foldl1(f, xs):
 def foldr1(f, xs):
     # foldr1 f xs ~ foldl (flip f) (reverse xs)
     return functools.reduce(flip(f), reversed(xs))
+
+def nub(xs):
+    return list(set(xs))
+
+def iterate(f, x):
+    while True:
+        yield x
+        x = f(x)
+
+def length(xs):
+    if type(xs) in (list, str, dict):
+        return len(xs)
+
+    # count iterables
+    n = 0
+    for _ in xs: n += 1
+
+    return n
+
+def take(n, xs):
+    return itertools.islice(xs, 0, n)
+
+def drop(n, xs):
+    return itertools.islice(xs, n, None)
+
+def index(i, xs):
+    """Index into any indexable object, including iterables."""
+
+    if type(xs) in (list, str, dict, range):
+        return xs[i]
+
+    # index into an iterable
+    it = iter(xs)
+    try:
+        for _ in range(i):
+            next(it)
+        return next(it)
+    except StopIteration:
+        raise IndexError("iterable index out of range")

@@ -46,3 +46,26 @@ def test_foldl():
 
     assert foldr1(operator.truediv, [1, 2, 3, 4, 5]) == 1/(2/(3/(4/5)))
     # assert foldr(operator.truediv, [2, 3, 4, 5], 1) == 1/(2/(3/(4/5)))
+
+def test_nub():
+    assert nub([1, 2, 3, 1, 2, 3, 1, 1]) == [1, 2, 3]
+
+def test_index():
+    assert index(1, [1, 2, 3]) == 2 # lists
+    assert index(1, range(3)) == 1 # ranges
+    assert index(1, (x for x in range(3))) == 1 # iterables
+
+def test_take():
+    assert list(take(3, [1, 2, 3, 4, 5, 6])) == [1, 2, 3]
+
+def test_drop():
+    assert list(drop(3, [1, 2, 3, 4, 5, 6])) == [4, 5, 6]
+
+def test_length():
+    assert length([1, 2, 3]) == 3
+    assert length(range(3)) == 3
+    assert length(1 for _ in range(3)) == 3
+
+def test_iterate():
+    assert list(take(4, iterate(lambda x: x*2, 1))) == [1, 2, 4, 8]
+    assert index(3, iterate(lambda x: x*2, 1)) == 2**3

@@ -3,6 +3,9 @@
 #
 # NOTE: _ will have to be imported explicitly, if desired.
 
+# TODO: Make a lot of these iterable functions work nicely on strings
+# such that if the input is a string, produce a string as output.
+
 import itertools, functools, operator
 
 class UnderscoreProxy:
@@ -148,3 +151,18 @@ def partition(f, xs):
 def transpose(xs):
     """Transpose a list matrix."""
     return list(map(list, zip(*xs)))
+
+def cons(x, xs):
+    ys = [x]
+    ys.extend(xs)
+    return ys
+
+def head(xs): return next(iter(xs))
+def tail(xs): return drop(1, xs)
+def empty(xs): return length(xs) == 0
+
+def lines(s): return s.split("\n")
+def unlines(xs): return "\n".join(xs)
+
+def words(s): return s.split()
+def unwords(xs): return " ".join(xs)

@@ -95,3 +95,18 @@ def test_transpose():
                        [4, 5, 6] ]) == [[1, 4],
                                         [2, 5],
                                         [3, 6]]
+
+def test_cons():
+    assert cons(1, [2, 3]) == [1, 2, 3]
+
+def test_head_tail():
+    assert head([1, 2, 3]) == 1
+    assert list(tail([1, 2, 3])) == [2, 3]
+
+def test_lines_unlines():
+    assert lines("a\nb\ncd") == ["a", "b", "cd"]
+    assert unlines(["a", "b", "cd"]) == "a\nb\ncd"
+
+def test_words_unwords():
+    assert words("a b cd") == ["a", "b", "cd"]
+    assert unwords(["a", "b", "cd"]) == "a b cd"

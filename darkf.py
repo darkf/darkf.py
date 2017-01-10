@@ -3,7 +3,7 @@
 #
 # NOTE: _ will have to be imported explicitly, if desired.
 
-import itertools
+import itertools, operator
 
 class UnderscoreProxy:
     """A proxy object that returns accessors for attributes and
@@ -25,7 +25,30 @@ class UnderscoreProxy:
 _ = UnderscoreProxy()
 
 def flatten(xs):
-    return list(itertools.chain.from_iterable(xs))
+    return itertools.chain.from_iterable(xs)
 
 def flatmap(f, xs):
     return flatten(map(f, xs))
+
+def zipwith(f, *xss):
+    return map(f, *xss)
+
+def group_by(f, xs):
+    it = iter(xs)
+    last = next(it)
+    group = [last]
+
+    for x in it:
+        if f(x, last):
+            group.append(x)
+        else:
+            yield group
+            group = [x]
+
+        last = x
+
+    if group:
+        yield group
+
+def group(xs):
+    return group_by(operator.eq, xs)

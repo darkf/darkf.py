@@ -144,3 +144,7 @@ def partition(f, xs):
 
     second.extend(list(it))
     return (first, second)
+
+def transpose(xs):
+    """Transpose a list matrix."""
+    return list(map(list, zip(*xs)))

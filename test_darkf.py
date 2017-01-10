@@ -8,6 +8,7 @@ from darkf import *
 from darkf import _
 from collections import namedtuple
 import math
+import pytest
 
 def test_underscore():
     nt = namedtuple('nt', 'x y foo')
@@ -60,6 +61,10 @@ def test_index():
     assert index(1, [1, 2, 3]) == 2 # lists
     assert index(1, range(3)) == 1 # ranges
     assert index(1, (x for x in range(3))) == 1 # iterables
+
+    with pytest.raises(IndexError):
+        index(1, [])
+        index(1, range(1))
 
 def test_take():
     assert list(take(3, [1, 2, 3, 4, 5, 6])) == [1, 2, 3]

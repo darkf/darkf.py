@@ -3,6 +3,8 @@
 #
 # NOTE: _ will have to be imported explicitly, if desired.
 
+import itertools
+
 class UnderscoreProxy:
     """A proxy object that returns accessors for attributes and
        items looked up on it.
@@ -21,3 +23,9 @@ class UnderscoreProxy:
         return lambda x: x[item]
 
 _ = UnderscoreProxy()
+
+def flatten(xs):
+    return list(itertools.chain.from_iterable(xs))
+
+def flatmap(f, xs):
+    return flatten(map(f, xs))

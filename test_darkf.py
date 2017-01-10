@@ -17,3 +17,9 @@ def test_underscore():
     # item accessors
     assert _[0]([42, 1, 2, 3]) == 42
     assert _['foo']({"foo": 42}) == 42
+
+def test_flatten():
+    assert flatten([[1, 2], [3, 4], [5, 6]]) == [1, 2, 3, 4, 5, 6]
+
+def test_flatmap():
+    assert flatmap(lambda x: [x,1], [1, 2, 3]) == [1, 1, 2, 1, 3, 1]

@@ -3,7 +3,7 @@
 #
 # NOTE: _ will have to be imported explicitly, if desired.
 
-import itertools, operator
+import itertools, functools, operator
 
 class UnderscoreProxy:
     """A proxy object that returns accessors for attributes and
@@ -52,3 +52,19 @@ def group_by(f, xs):
 
 def group(xs):
     return group_by(operator.eq, xs)
+
+def flip(f):
+    return lambda y,x: f(x, y)
+
+def compose(f, g):
+    return lambda x: f(g(x))
+
+def foldl(f, xs, init):
+    return functools.reduce(f, xs, init)
+
+def foldl1(f, xs):
+    return functools.reduce(f, xs)
+
+def foldr1(f, xs):
+    # foldr1 f xs ~ foldl (flip f) (reverse xs)
+    return functools.reduce(flip(f), reversed(xs))

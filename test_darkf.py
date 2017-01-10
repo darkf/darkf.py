@@ -39,3 +39,10 @@ def test_group_by():
 def test_group():
     assert list(group(["a", "a", "a", "b", "c", "c", "d"])) == \
                [["a", "a", "a"], ["b"], ["c", "c"], ["d"]]
+
+def test_foldl():
+    assert foldl1(operator.truediv, [1, 2, 3, 4, 5]) == (((1/2)/3)/4)/5
+    assert foldl(operator.truediv, [2, 3, 4, 5], 1) == (((1/2)/3)/4)/5
+
+    assert foldr1(operator.truediv, [1, 2, 3, 4, 5]) == 1/(2/(3/(4/5)))
+    # assert foldr(operator.truediv, [2, 3, 4, 5], 1) == 1/(2/(3/(4/5)))

@@ -107,3 +107,15 @@ def index(i, xs):
         return next(it)
     except StopIteration:
         raise IndexError("iterable index out of range")
+
+def find(f, xs):
+    for x in xs:
+        if f(x):
+            return x
+    return None # TODO: except?
+
+def find_index(f, xs):
+    for i, x in enumerate(xs):
+        if f(x):
+            return i
+    return None # TODO: except?

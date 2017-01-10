@@ -69,3 +69,9 @@ def test_length():
 def test_iterate():
     assert list(take(4, iterate(lambda x: x*2, 1))) == [1, 2, 4, 8]
     assert index(3, iterate(lambda x: x*2, 1)) == 2**3
+
+def test_find():
+    assert find(lambda x: x > 2, [1, 2, 3, 4, 5]) == 3
+
+def test_find_index():
+    assert find_index(lambda x: x > 2, [1, 2, 3, 4, 5]) == 2

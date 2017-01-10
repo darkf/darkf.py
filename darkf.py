@@ -39,6 +39,10 @@ def flatmap(f, xs):
 def zipwith(f, *xss):
     return map(f, *xss)
 
+def xmap(f, xs):
+    """Map returning a list."""
+    return list(map(f, xs))
+
 def group_by(f, xs):
     it = iter(xs)
     last = next(it)

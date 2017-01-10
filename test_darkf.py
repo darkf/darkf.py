@@ -7,6 +7,7 @@
 from darkf import *
 from darkf import _
 from collections import namedtuple
+import math
 
 def test_underscore():
     nt = namedtuple('nt', 'x y foo')
@@ -85,3 +86,6 @@ def test_partition():
     assert partition(lambda x: x <= 3, [1, 2, 3, 4, 5, 6]) == ([1, 2, 3], [4, 5, 6])
     assert partition(lambda x: x <= 3, []) == ([], [])
     assert partition(lambda x: x <= 3, [1]) == ([1], [])
+
+def test_product():
+    assert product(range(1, 10+1)) == math.factorial(10)

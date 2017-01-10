@@ -75,6 +75,9 @@ def foldr1(f, xs):
 def scanl1(f, xs):
     return itertools.accumulate(xs, f)
 
+def product(xs):
+    return functools.reduce(operator.mul, xs)
+
 def nub(xs):
     return list(set(xs))
 

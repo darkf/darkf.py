@@ -182,3 +182,60 @@ def mapfst(f, pair):
 
 def mapsnd(f, pair):
     return (pair[0], f(pair[1]))
+
+def swap_pair(pair):
+    (a, b) = pair
+    return (b, a)
+
+class BiMap:
+    """A bi-directional map (dict). Key map to values and values to keys."""
+
+    def __init__(self, *args, **kwargs):
+        self.fwd = dict(*args, **kwargs)
+        self.bwd = dict(map(swap_pair, self.fwd.items()))
+
+    def __len__(self): return len(self.fwd) + len(self.bwd)
+    def __getitem__(self, key):
+        if key in self.fwd:
+            return self.fwd[key]
+        elif key in self.bwd:
+            return self.bwd[key]
+        raise KeyError(key)
+
+    def __setitem__(self, key, value):
+        if key in self.fwd:
+            # remove old bwd reference
+            del self.bwd[self.fwd[key]]
+        
+        self.fwd[key] = value
+        self.bwd[value] = key
+
+    def __contains__(self, key): return key in self.fwd or key in self.bwd
+
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except KeyError:
+            return default
+
+    def clear(self):
+        self.fwd.clear()
+        self.bwd.clear()
+
+    def items(self):
+        return flatten((self.fwd.items(), self.bwd.items()))
+
+    def __iter__(self): return iter(self.items())
+
+    def keys(self):
+        return map(fst, self.items())
+
+    def values(self):
+        return map(snd, self.items())
+
+    def update(self, other):
+        self.fwd.update(other)
+        self.bwd.update(map(swap_pair, other.items()))
+
+    def copy(self):
+        return BiMap(self.items())

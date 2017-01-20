@@ -122,3 +122,40 @@ def test_lines_unlines():
 def test_words_unwords():
     assert words("a b cd") == ["a", "b", "cd"]
     assert unwords(["a", "b", "cd"]) == "a b cd"
+
+def test_bimap():
+    bimap = BiMap(a=1, b=2)
+
+    # forward mapping
+    assert bimap["a"] == 1
+    assert bimap["b"] == 2
+
+    # backward mapping
+    assert bimap[1] == "a"
+    assert bimap[2] == "b"
+
+    # length
+    assert len(bimap) == 2*2
+
+    # mutation
+    bimap["a"] = 42
+    assert bimap["a"] == 42
+    assert bimap[42] == "a"
+
+    # assert length didn't change
+    assert len(bimap) == 2*2
+
+    # invalid keys
+    with pytest.raises(KeyError):
+        bimap["c"]
+        bimap[3]
+
+    # get
+    assert bimap.get("c") == None
+    assert bimap.get("c", 42) == 42
+
+    # keys
+    assert set(bimap.keys()) == {"a", "b", 42, 2}
+
+    # values
+    assert set(bimap.values()) == {"a", "b", 42, 2}
